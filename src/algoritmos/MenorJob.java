@@ -32,7 +32,7 @@ public class MenorJob {
 		while (!filaExecucao.isEmpty()) {		
 
 			if (filaExecucao.peek().getTempoExecutado() == 0) {
-				ordena(filaExecucao);
+				ordenaFila(filaExecucao);
 				filaExecucao.peek().setTempoResposta(tempoGlobal - filaExecucao.peek().getInicio());				
 			}
 
@@ -57,7 +57,7 @@ public class MenorJob {
 
 		}
 
-		System.out.print("\n\nSJF: ");
+		System.out.print("\nSJF: ");
 		tempoMedioRetorno();
 		tempoMedioResposta();
 		tempoMedioEspera();					
@@ -102,9 +102,7 @@ public class MenorJob {
 
 
 
-	public void adicionaNaFila(){
-
-		List<Processo> listAux = new ArrayList<Processo>();		
+	public void adicionaNaFila(){		
 
 		for (Processo processo : listaProcessos) {
 			boolean aux = false;
@@ -114,15 +112,6 @@ public class MenorJob {
 				}
 			}
 			if (processo.getInicio() == tempoGlobal && aux == false) {
-				listAux.add(processo);
-			}
-		}
-
-
-		if (!listAux.isEmpty()) {
-			ordenaLista(listAux);
-
-			for (Processo processo : listAux) {
 				filaExecucao.offer(processo);
 			}
 		}
@@ -144,7 +133,7 @@ public class MenorJob {
 		Collections.sort(lista,comparator);
 	}
 
-	public void ordena(Queue<Processo> fila){
+	public void ordenaFila(Queue<Processo> fila){
 		List<Processo> aux = new ArrayList<Processo>();
 		for (Processo processo : fila) {
 			aux.add(processo);			

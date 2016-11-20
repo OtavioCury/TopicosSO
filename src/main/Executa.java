@@ -56,11 +56,11 @@ public class Executa {
 
 		MenorJob menorJob = new MenorJob(filaProcessosSJF);
 
-		roundRobin.executa();		
-
 		fcfs.executa();
 
 		menorJob.executa();
+
+		roundRobin.executa();				
 
 		quant.close();
 
