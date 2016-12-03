@@ -50,7 +50,7 @@ public class OTM {
 				filaPaginasOriginal.poll();
 			}
 		}
-		System.out.println(faltaPaginas);
+		System.out.println("OTM "+faltaPaginas);
 	}
 
 	public Pagina maiorReferencia(Queue<Pagina> filaPaginas){

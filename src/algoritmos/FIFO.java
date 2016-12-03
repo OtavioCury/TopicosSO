@@ -49,7 +49,7 @@ public class FIFO {
 			}
 		}
 
-		System.out.println(faltaPaginas);
+		System.out.println("FIFO "+faltaPaginas);
 
 
 	}

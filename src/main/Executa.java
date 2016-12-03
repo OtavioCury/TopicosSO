@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 import algoritmos.FIFO;
+import algoritmos.LRU;
 import algoritmos.OTM;
 import modelo.Pagina;
 
@@ -13,6 +14,8 @@ public class Executa {
 		// TODO Auto-generated method stub		
 		Queue<Pagina> filaPaginaFifo = new LinkedList<Pagina>();
 		Queue<Pagina> filaPaginaOtm = new LinkedList<Pagina>();
+		Queue<Pagina> filaPaginaLRU = new LinkedList<Pagina>();
+
 		int quantMolduras = 4;
 
 		filaPaginaFifo.offer(new Pagina(1, 0));
@@ -29,7 +32,6 @@ public class Executa {
 		filaPaginaFifo.offer(new Pagina(5, 0));
 
 		FIFO fifo = new FIFO(filaPaginaFifo, quantMolduras);
-
 		fifo.executa();
 
 		filaPaginaOtm.offer(new Pagina(1, 0));
@@ -48,6 +50,21 @@ public class Executa {
 		OTM otm = new OTM(filaPaginaOtm, quantMolduras);
 		otm.executa();
 
+		filaPaginaLRU.offer(new Pagina(1, 0));
+		filaPaginaLRU.offer(new Pagina(2, 0));
+		filaPaginaLRU.offer(new Pagina(3, 0));
+		filaPaginaLRU.offer(new Pagina(4, 0));
+		filaPaginaLRU.offer(new Pagina(1, 0));
+		filaPaginaLRU.offer(new Pagina(2, 0));
+		filaPaginaLRU.offer(new Pagina(5, 0));
+		filaPaginaLRU.offer(new Pagina(1, 0));
+		filaPaginaLRU.offer(new Pagina(2, 0));
+		filaPaginaLRU.offer(new Pagina(3, 0));
+		filaPaginaLRU.offer(new Pagina(4, 0));
+		filaPaginaLRU.offer(new Pagina(5, 0));
+
+		LRU lru = new LRU(filaPaginaLRU, quantMolduras); 
+		lru.executa();
 	}
 
 }
