@@ -1,13 +1,15 @@
 package main;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
-import modelo.Processo;
 import algoritmos.FCFS;
 import algoritmos.MenorJob;
 import algoritmos.RoundRobin;
+import modelo.Processo;
 
 public class Executa {
 
@@ -16,39 +18,40 @@ public class Executa {
 		//Fila de processos 
 		List<Processo> filaProcessosRR = new ArrayList<Processo>();
 		List<Processo> filaProcessosFCFS = new ArrayList<Processo>();
-		List<Processo>
-		filaProcessosSJF = new ArrayList<Processo>();
-		//Quantidade de processos
-		int quantProcessos;
+		List<Processo> filaProcessosSJF = new ArrayList<Processo>();		
+		int id = 0;
 
-		Scanner quant = new Scanner(System.in);
-		System.out.println("Digite a quantidade de processos");
-		quantProcessos = quant.nextInt();
+		BufferedReader f = new BufferedReader(new InputStreamReader(System.in));
+		String x = null;
 
+		try {
+			while( (x = f.readLine()) != null )
+			{
 
-		//lê os dados dos processos
-		for (int i = 0; i < quantProcessos; i++) {			
-			int inicio, fim;
+				String[] numerosString = x.split(" ");
+				List<Integer> numeros = new ArrayList<Integer>();				
+				
+				for (int i = 0; i < numerosString.length; i++) {
+					if (!numerosString[i].equals("")) {
+						numeros.add(Integer.parseInt(numerosString[i]));
+					}
+				}				
 
-			Scanner chegada = new Scanner(System.in);
-			System.out.println("Digite o tempo de chegada processo "+(i+1));
-			inicio = chegada.nextInt();			
+				Processo processo = new Processo(id, numeros.get(0), numeros.get(1));
+				Processo processo2 = new Processo(id, numeros.get(0), numeros.get(1));
+				Processo processo3 = new Processo(id, numeros.get(0), numeros.get(1));
 
-			Scanner termino = new Scanner(System.in);
-			System.out.println("Digite o tempo de término processo "+(i+1));
-			fim = termino.nextInt();
+				filaProcessosRR.add(processo);
+				filaProcessosFCFS.add(processo2);
+				filaProcessosSJF.add(processo3);
 
+				id++;
 
-			Processo processo = new Processo(i, inicio, fim);
-			Processo processo2 = new Processo(i, inicio, fim);
-			Processo processo3 = new Processo(i, inicio, fim);
-
-			filaProcessosRR.add(processo);
-			filaProcessosFCFS.add(processo2);
-			filaProcessosSJF.add(processo3);
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-
-
 
 		RoundRobin roundRobin = new RoundRobin(filaProcessosRR);
 
@@ -61,8 +64,6 @@ public class Executa {
 		menorJob.executa();
 
 		roundRobin.executa();				
-
-		quant.close();
 
 	}
 
