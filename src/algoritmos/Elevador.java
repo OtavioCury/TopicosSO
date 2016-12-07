@@ -19,6 +19,7 @@ public class Elevador {
 
 		int atual = primeiroCilindro;
 		int soma = 0;
+		int menor = quantCilindros + 1;
 
 		List<Integer> acima = new ArrayList<Integer>();
 		List<Integer> abaixo = new ArrayList<Integer>();
@@ -29,40 +30,84 @@ public class Elevador {
 			}else{
 				acima.add(integer);
 			}
+
+			if (Math.abs(atual - integer) < menor) {
+				menor = integer;
+			}
 		}		
 
-		while (!acima.isEmpty()) {
+		if (acima.contains(menor)) {
 
-			int menorDistancia = quantCilindros + 1;
-			int index = quantCilindros + 1;
+			while (!acima.isEmpty()) {
 
-			for (int i = 0; i < acima.size(); i++) {
-				if ((Math.abs(atual - acima.get(i))) < menorDistancia) {
-					menorDistancia = Math.abs(atual - acima.get(i));
-					index = i;
-				}
-			}			
+				int menorDistancia = quantCilindros + 1;
+				int index = quantCilindros + 1;
 
-			soma = soma + menorDistancia;
-			atual = acima.get(index);
-			acima.remove(index);
-		}
+				for (int i = 0; i < acima.size(); i++) {
+					if ((Math.abs(atual - acima.get(i))) < menorDistancia) {
+						menorDistancia = Math.abs(atual - acima.get(i));
+						index = i;
+					}
+				}			
 
-		while (!abaixo.isEmpty()) {
+				soma = soma + menorDistancia;
+				atual = acima.get(index);
+				acima.remove(index);
+			}
 
-			int menorDistancia = quantCilindros + 1;
-			int index = quantCilindros + 1;
+			while (!abaixo.isEmpty()) {
 
-			for (int i = 0; i < abaixo.size(); i++) {
-				if ((Math.abs(atual - abaixo.get(i))) < menorDistancia) {
-					menorDistancia = Math.abs(atual - abaixo.get(i));
-					index = i;
-				}
-			}			
+				int menorDistancia = quantCilindros + 1;
+				int index = quantCilindros + 1;
 
-			soma = soma + menorDistancia;
-			atual = abaixo.get(index);
-			abaixo.remove(index);
+				for (int i = 0; i < abaixo.size(); i++) {
+					if ((Math.abs(atual - abaixo.get(i))) < menorDistancia) {
+						menorDistancia = Math.abs(atual - abaixo.get(i));
+						index = i;
+					}
+				}			
+
+				soma = soma + menorDistancia;
+				atual = abaixo.get(index);
+				abaixo.remove(index);
+			}		
+
+		}else{
+
+			while (!abaixo.isEmpty()) {
+
+				int menorDistancia = quantCilindros + 1;
+				int index = quantCilindros + 1;
+
+				for (int i = 0; i < abaixo.size(); i++) {
+					if ((Math.abs(atual - abaixo.get(i))) < menorDistancia) {
+						menorDistancia = Math.abs(atual - abaixo.get(i));
+						index = i;
+					}
+				}			
+
+				soma = soma + menorDistancia;
+				atual = abaixo.get(index);
+				abaixo.remove(index);
+			}		
+
+			while (!acima.isEmpty()) {
+
+				int menorDistancia = quantCilindros + 1;
+				int index = quantCilindros + 1;
+
+				for (int i = 0; i < acima.size(); i++) {
+					if ((Math.abs(atual - acima.get(i))) < menorDistancia) {
+						menorDistancia = Math.abs(atual - acima.get(i));
+						index = i;
+					}
+				}			
+
+				soma = soma + menorDistancia;
+				atual = acima.get(index);
+				acima.remove(index);
+			}
+
 		}		
 
 		System.out.println("ELEVADOR "+soma);
